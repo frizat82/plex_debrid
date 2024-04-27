@@ -168,10 +168,21 @@ def post(url, data):
     except:
         response = None
     return response
-
+    
+def post2(url, data):
+    try:
+        response = session.post(url, headers={
+            'Content-type': "application/json"}, data=data)
+        logerror(response)
+        response = json.loads(response.content, object_hook=lambda d: SimpleNamespace(**d))
+        time.sleep(1.1)
+    except:
+        response = None
+    return response
+    
 def oauth(code=""):
     if code == "":
-        response = post('https://api.trakt.tv/oauth/device/code', json.dumps({'client_id': client_id}))
+        response = post2('https://api.trakt.tv/oauth/device/code', json.dumps({'client_id': client_id}))
         if not response == None:
             return response.device_code, response.user_code
         else:
@@ -180,7 +191,7 @@ def oauth(code=""):
     else:
         response = None
         while response == None:
-            response = post('https://api.trakt.tv/oauth/device/token', json.dumps(
+            response = post2('https://api.trakt.tv/oauth/device/token', json.dumps(
                 {'code': code, 'client_id': client_id, 'client_secret': client_secret}))
             time.sleep(1)
         return response.access_token
