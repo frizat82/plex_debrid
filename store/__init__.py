@@ -8,13 +8,12 @@ def load(module,variable):
     try:
         filename = config_dir + '/' + module + "_" + variable + '.pkl'
         if os.path.exists(filename):
-            ui_print("["+module+"] reading cached "+variable+" file ...")
+            ui_print("["+module+"] reading cached "+variable+" file ... " + filename + " " + cache)
             with open(filename, 'rb') as f:
                 cache = pickle.load(f)
-                print ("cache:" + cache)
             ui_print("done")
-    except:
-        ui_print("["+module+"] error: couldnt read cached "+variable+" file.")       
+    except Exception as e: 
+        ui_print("["+module+"] error: couldnt read cached "+variable+" file. " + e)       
         cache = []
     return cache
 
@@ -26,9 +25,9 @@ def save(cache,module,variable):
     from base import os
     try:
         filename = config_dir + '/' + module + "_" + variable + '.pkl'
-        ui_print("["+module+"] writing cached "+variable+" file ...")    
+        ui_print("["+module+"] writing cached "+variable+" file ... " + cache)    
         with open(filename, 'wb') as f:
             pickle.dump(cache, f)
         ui_print("done")
     except:
-        ui_print("["+module+"] error: couldnt write cached "+variable+" file.") 
+        ui_print("["+module+"] error: couldnt write cached "+variable+" file. " + e) 

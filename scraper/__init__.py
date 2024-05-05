@@ -36,7 +36,7 @@ def scrape(query, altquery="(.*)"):
                 scraped_releases += result
         for release in scraped_releases:
             release.title = ''.join([i if ord(i) < 512 else '' for i in release.title])
-            ui_print(release.title, debug=ui_settings.debug)
+            #ui_print(release.title, debug=ui_settings.debug)
         ui_print('done - found ' + str(len(scraped_releases)) + ' releases')
         if len(scraped_releases) > 0:
             break

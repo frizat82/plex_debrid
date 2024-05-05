@@ -144,8 +144,8 @@ def resolve(result):
                 scraped_releases += [
                     releases.release('[jackett: unnamed]', 'torrent', result.Title, [], float(result.Size) / 1000000000,[magnet], seeders=result.Seeders)]
             return scraped_releases
-    except:
-        ui_print("[jackett] error: resolver couldnt get magnet/torrent for release: " + result.Title,ui_settings.debug)
+    except Exception as e: 
+        ui_print("[jackett] error: resolver couldnt get magnet/torrent for release: " + result.Title + " " + e,ui_settings.debug)
         return scraped_releases
 
 # Multiprocessing watchlist method
