@@ -28,6 +28,7 @@ def save(cache,module,variable):
     from ui.ui_print import config_dir
     from base import pickle
     from base import os
+    import json
     try:
         filename = config_dir + '/' + module + "_" + variable + '.pkl'
         ui_print("["+module+"] writing cached "+variable+" file ...")
